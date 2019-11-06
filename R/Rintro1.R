@@ -443,3 +443,15 @@ guys <- data.frame(name = names.vec,
 print(guys)
 summary(guys)
 str(guy)
+
+
+
+l9 <- list(a1=list(rank=1, peak=1, title="avatar",worlwidegross=2787,year=2009),
+           a2=list(rank=2, peak=1 , title="titanic",worldwidegross=2187,year=1997),
+           a3=list(rank=3, peak=3 , title="star wars",worldwidegross=2068,year=2015),
+           a4=list(rank=4, peak=4 , title="avengers",worldwidegross=1844,year=2018),
+           a5=list(rank=5, peak=3 , title="jurassic",worldwidegross=1671,year=2015))
+l9
+
+l9[[2]]$title
+l9[[2]][[3]]
