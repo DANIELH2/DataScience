@@ -85,7 +85,7 @@ summary(v2a)
 ### generate a factor and define the levels
 v6 <- c(1,3,2,3,2,4,1,2,1,1,1,2,1,4,3,4,2,4)
 v6f <- factor(v6, levels=c(1,2,3,4), labels=c("None","Low","Medium","High"))
-
+ 
 summary(v6)
 summary(v6f)
 
@@ -115,7 +115,7 @@ v9 <- letters
 v10 <- LETTERS
 v9[5]
 v10[1:3]
-
+v10[c(5,15,22)]
 length(v10)
 v10[seq(1,26,3)]
 v10[seq(1,length(v10),3)]
@@ -190,7 +190,7 @@ m1 + t(m1)
 m1 - t(m1)
 
 m1 + m2 ## doesn't work
-m1 + as.vector(m2) ## doesn't work
+m1 + as.vector(m2) ## /
 
 
 ## Multiplication/Division
@@ -225,7 +225,7 @@ I
 s
 solve(s)
 s %*% solve(s)
-
+?solve
 ##########################
 ### Arrays
 ##########################
@@ -315,7 +315,7 @@ class(l5)
 str(l5)
 summary(l5)
 
-l5$model
+l5[[1]]$model
 l5[1]
 l5[[1]]
 l5[[2]]
@@ -366,7 +366,7 @@ summary(df)
 df[3,]
 df[,3]
 
-df$c
+vvdsdf$c
 df$b
 
 df.false <- subset(df, c==FALSE)
@@ -442,5 +442,4 @@ guys <- data.frame(name = names.vec,
 
 print(guys)
 summary(guys)
-str(guys)
- 
+str(guy)
