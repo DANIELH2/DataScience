@@ -82,6 +82,9 @@ summary(s2)
 
 s3 <- c("I","love","data","science")
 
+s10 <- c("x1","x2","x3","x4")
+s11 <- paste("y",paste(s10,collapse="+"),sep="~")
+s11
 s4 <- paste(s1,collapse=" ")
 s4
 class(s4)
@@ -143,7 +146,7 @@ ls()  ## show all the available objects existing in the environment
 rm("C")  ## remove the C object
 
 getwd()  ## get the working directory
-setwd("/home/karpati/Rintro/")  ## set the working directory to the specified path
+setwd("/home/dsuser07/DataScience/R/")  ## set the working directory to the specified path
 
 dt <- Sys.time()  ## get system date-time
 
@@ -155,6 +158,13 @@ format(dt,format="%I:%M %p")  ## time format: '05:05 PM'
 
 timestamp()
 date()
+
+d3<- "10-02-2015"
+d3
+class(d3)
+d4 <- as.date(d3,format ="%d-%m-%y")
+d4
+class(d4)
 
 ### Sequences
 1:10
@@ -183,6 +193,9 @@ runif(n=5, min=-3, max=3)  ## 3 random numbers between -3 and 3
 
 ## normal distribution
 rnorm(n=10, mean=5, sd=2)
+rnd <- rnorm(n=10000,mean=5,sd=2)
+hist(rnd)
+
 
 ## binomial distribution
 rbinom(n=10, size=1, prob=0.4)
@@ -248,6 +261,7 @@ l1
 
 
 lapply(l1, sum)
+lapply(l1,colSums)
 ### We can use the selection operator `[` for extracting values at the same position
 ### Get the element of the third column of each element of a list 
 lapply(l1, "[",,3)  
@@ -264,7 +278,7 @@ l1
 ### We can use the selection operator `[` for extracting values at the same position
 ### the following extract the first value of each element in the list 
 sapply(l1, "[",1,simplify = F)
-
+sapply(l1, "[",1:3:1:3)
 ### This will extract matrices containing the three first rows and columns of each element 
 sapply(l1, "[",1:3,1:3,simplify = F)
 
@@ -313,6 +327,9 @@ c(x,y)
 x <- 5
 y <- ifelse(x > 5, 10, 5)
 c(x,y)
+
+ifelse(x > 5 , 10 ,ifelse(x>3,3,5))
+
 
 ###################################
 ### Recursive
