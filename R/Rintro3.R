@@ -17,9 +17,11 @@ class(iris2)
 
 iris
 iris2
-
+head(iris2)
 #### selection of columns
 iris2 %>% select(Sepal.Length, Sepal.Width)
+
+select(iris2,Sepal.Length, Sepal.Width)
 
 ### selection of rows using a condition
 iris2 %>% filter(Species=="setosa")
