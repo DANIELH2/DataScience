@@ -330,7 +330,6 @@ c(x,y)
 
 ifelse(x > 5 , 10 ,ifelse(x>3,3,5))
 
-
 ###################################
 ### Recursive
 ###################################
@@ -476,21 +475,27 @@ for(x in 1:4) {
 }
 
 ### barplot
-barplot(df$mpg)
-
+barplot(mtcars$mpg)
+barplot(mtcars$cyl)
+barplot(table(mtcars$cyl))
+mtcars$cyl<-factor(mtcars$cyl)
+barplot(table(mtcars$gear))
 ### histograms and boxplots
 x <- rnorm(400, mean=40, sd=15)
 hist(x)
 y <- rbinom(1:400, 2, 0.3)
 summary(y)
+hist(y)
 table(y)
+boxplot(x)
 boxplot(x ~ y)
 
-t1 <- table(v2)
+t1 <- table(y)
 t1
 pie(t1)
 
 scatter.smooth(x)
+scatter.smooth(x,col=y+1)
 
 ### adding color to a plot
 mycol <- ifelse(x >44,"red","blue")
@@ -508,7 +513,7 @@ legend(x="bottomright",
        fill=c("red","blue"), 
        col=c("red","blue") ,
        legend=c(">44","<=44"),
-       cex=0.5,
+       cex=0.8,
        horiz = T)
 
 ### ploting many graphics at once
