@@ -15,15 +15,27 @@ x4 <- mtcars$qsec
 
 MODE <- function(x) {
   freq <- table(x)
-  Xmo <- names(freq[1])
+  idx <- order(freq,decreasing = T)
+  Xmo <- names(freq[idx][1])
     return(Xmo)
 }
+
+MODE(x1)
+MODE(x2)
+MODE(x3)
+mode()
+bb1 <- table(x1)
+bb1
+order(bb1,decreasing = T)
+bb2 <- order(bb1,decreasing = T)
+
+names(bb1)
 
 ### create a function that shows the median of a given vector. 
 
 MEDIAN <- function(x) {
   x <- x[order(x)]
-  idx <- length(x)/2
+  idx <- (length(x)+1)/2
   Xme <- (x[floor(idx)] + x[ceiling(idx)])/2
   return(Xme)
 }
@@ -43,7 +55,7 @@ RANGE <- function(x) {
   rng <- paste(max(x)-min(x)," (",min(x),",",max(x),")",sep="")
     return(rng)
 }
-
+RANGE(x1)
 ### Create a function that shows the Interquartile range (IQR) and in parenthesis the 25%-75% values.
 ### You can check the help for the 'quantile' function.
 
