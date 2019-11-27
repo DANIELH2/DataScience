@@ -15,7 +15,7 @@ data$Species <- NULL
 rnd <- sample(seq(1,nrow(data)))
 data <-data[rnd,]
 head(data)
-mod<- glm(factor(y)~sepal.width + petal.length=data.family="binomial")
+mod <- glm(factor(y) ~  Sepal.Width + Petal.Length,data=data,family="binomial")
 summary(mod)
 pred <- predict(mod,data,type="respons")
 hist(pred)
@@ -23,6 +23,8 @@ yhat<-ifelse(pred>=0.5,1,0)
 table(yhat=yhat,y=data$y)
 pred<-pred(mod,data,type="response")
 hist(pred)
-yhat<- ifelse()
+yhat<- ifelse(pred>=0.5,1,0)
+table(yhat=yhat,y=data$y)
+
 #acouracy <-
 #acouracy
