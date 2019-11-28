@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 
 ### Import the titanic dataset
-titanic <- read.csv(paste(path,"../data/titanic.csv",sep="/"))
+titanic <- read.csv("../data/titanic.csv")
 head(titanic)
 
 ##################################################
@@ -198,7 +198,7 @@ titanic %>%
 ##  (must be titles), and with them we will create a new column. Then we will procede as 
 ##  we did in the other analyses.
 ############################################
-
+summary(titanic$Name)
 words = paste(titanic$Name, collapse=" ")
 class(words)
 print(words)
@@ -240,7 +240,4 @@ titanic[grep("Master", titanic$Name,fixed = T),"Title"] <- "Master"
 
 table(titanic$Title)
 
-titanic %>% 
-  group_by(Title) %>% 
-  summarise(count=n(),survived=sum(Survived),percent=(sum(Survived)/n()*100))
-
+ 
