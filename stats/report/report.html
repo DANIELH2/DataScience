@@ -1,245 +1,208 @@
-<!DOCTYPE html>
-      <html>
-      <head>
-      <title>Data Visualization</title>
-      <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-      <link rel='stylesheet' href='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css'>
 
-      <script src='http://code.jquery.com/jquery-1.10.2.js'></script>
-      <script>
-      $(document).ready(function(){
-      $('.onetoone').hide();
-      });
-
-      $(function() {
-      $('.origimg').click(function(e) {
-      $('#popup_img').attr('src',$(this).attr('src'));
-      $('#myContainer').hide();
-      var pos = $(document).scrollTop();
-      $('#myContainer').css({'top':pos+20,'left':250, 'position':'absolute', 'border':'1px solid black', 'padding':'0px'});
-      $('#myContainer').show();
-      });
-      $('#myContainer').click(function(e) {
-      $('#myContainer').hide();
-      });
-
-      $('#myform2').submit(function(e) {
-      e.preventDefault();
-      });
-
-      $('#onetoone').on('click',function() {
-      console.log('onetone button - 1');
-      $('#onetoone').hide();
-      $('#aslist').show();
-      // To show only individual rows:
-      $('.Row').hide();
-      $('.onetoone').show();
-      // then we iterate
-      var i = $('.Row').length;
-      // Then we iterate
-      var nxt = $('#idx').val();
-      if (nxt < i & nxt >0) {
-      $('.Row').hide();
-      $('.Row').eq(0).show();
-      $('.Row').eq(nxt).show();
-      } else {
-      $('#idx').val(1)
-      }
-      console.log('onetone button - 2');
-      });
-
-      $('#aslist').on('click',function() {
-      console.log('aslist button - 1');
-      $('#onetoone').show();
-      $('#aslist').hide();
-      $('.onetoone').hide();
-      $('.Row').show();
-      console.log('aslist button - 2');
-      });
-
-      $('#less').on('click',function(){
-      console.log('less button - 1');
-      var i = $('.Row').length;
-      var nxt = parseInt($('#idx').val(),10) - 1;
-      if (nxt < i & nxt >0) {
-      $('#idx').val(nxt)
-      $('.Row').hide();
-      $('.Row').eq(0).show();
-      $('.Row').eq(nxt).show();
-      } else {
-      $('#idx').val(1)
-      }
-      console.log('less button - 2');
-      });
-
-      $('#more').on('click',function(){
-      console.log('more button - 1');
-      var i = $('.Row').length;
-      var nxt = parseInt($('#idx').val(),10) + 1;
-      if (nxt < i & nxt >0) {
-      $('#idx').val(nxt)
-      $('.Row').hide();
-      $('.Row').eq(0).show();
-      $('.Row').eq(nxt).show();
-      } else {
-      $('#idx').val(i)
-      }
-      console.log('more button - 2');
-      });
-
-      $('#idx').on('change', function(){
-      console.log('idx changed - 1');
-      var i = $('.Row').length;
-      var nxt = $('#idx').val();
-      if (nxt < i & nxt >0) {
-      $('#idx').val(nxt)
-      $('.Row').hide();
-      $('.Row').eq(0).show();
-      $('.Row').eq(nxt).show();
-      } else {
-      $('#idx').val(i)
-      }
-      console.log('idx changed - 2');
-      });
-      });
-
-      </script>
-
-      <style type='text/css'>
-      .Table
-      {
-      display: table;
-      }
-      .Title
-      {
-      display: table-caption;
-      text-align: center;
-      font-weight: bold;
-      font-size: larger;
-      background-color:#4C6F50;
-      color: #fff;
-      }
-      .Row
-      {
-      display: table-row;
-      }
-      .Row:nth-child(even) {
-        background-color: #56882433;
-      }
-      .Cell
-      {
-      display: table-cell;
-      border: solid;
-      border-width: thin;
-      padding-left: 5px;
-      padding-right: 5px;
-      vertical-align: top;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-      }
-      </style>
-
-      </head>
-
-      <body>
-      <div id='pageone' data-role='main' class='ui-content'>
-      
-<p><p><h1> Data Visualization & Exploration </h1>
-                <form>
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Exploratory Data Analysis (EDA)</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+        <link rel='stylesheet' href='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css'>
+        <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+        <script src='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>
+        <script>
+        $(document).ready(function(){
+           $('.onetoone').hide();
+        });
+        $(function() {
+           $('.origimg').click(function(e) {
+             $('#popup_img').attr('src',$(this).attr('src'));
+             $('#myContainer').hide();
+             var pos = $(document).scrollTop();
+             $('#myContainer-popup').css({'clip':'auto', 'top':pos+20, 'left':250, 'width':'450px', 'height':'338px'});
+             //$('#myContainer').css({'top':pos+20,'left':250, 'width':'450px', 'height':'338px' ,'position':'absolute', 'border':'1px solid black', 'padding':'0px'});
+             $('#myContainer').css({'width':'450px', 'height':'338px' ,'position':'absolute', 'border':'1px solid black', 'padding':'0px'});
+             $('#myContainer').show();
+             $('#myContainer').css({'clip':'rect(1px, 450px, 338px, 0px)'});
+             $('#popup_img').css('visibility', 'visible');
+             //$('#myContainer-popup').css({'top':pos+20,'left':250, 'width':'450px', 'height':'338px' ,'position':'absolute', 'border':'1px solid black', 'padding':'0px'});
+             //alert("you clicked on the image:" +  $(this).attr('src'));
+            });
+           $('#myContainer').click(function(e) {
+             $('#myContainer').hide();
+           });
+           $('#myform2').submit(function(e) {
+             e.preventDefault();
+           });
+           $('#onetoone').on('click',function() {
+             console.log('onetone button - 1');
+             $('#onetoone').hide();
+             $('#aslist').css('visibility','visible')
+             $('#aslist').show();
+             // To show only individual rows:
+             $('.Row').hide();
+             $('.onetoone').show();
+             // then we iterate
+             var i = $('.Row').length;
+             // Then we iterate
+             var nxt = $('#idx').val();
+             if (nxt < i & nxt >0) {
+               $('.Row').hide();
+               $('.Row').eq(0).show();
+               $('.Row').eq(nxt).show();
+             } else {
+               $('#idx').val(1)
+             }
+             console.log('onetone button - 2');
+          });
+          $('#aslist').on('click',function() {
+            console.log('aslist button - 1');
+            $('#onetoone').show();
+            $('#aslist').hide();
+            $('.onetoone').hide();
+            $('.Row').show();
+            console.log('aslist button - 2');
+          });
+          $('#less').on('click',function(){
+            //console.log('less button - 1');
+            var i = $('.Row').length;
+            var nxt = parseInt($('#idx').val(),10) - 1;
+            if (nxt < i & nxt >0) {
+              $('#idx').val(nxt)
+              $('.Row').hide();
+              $('.Row').eq(0).show();
+              $('.Row').eq(nxt).show();
+            } else {
+              $('#idx').val(1)
+            }
+            //console.log('less button - 2');
+          });
+          $('#more').on('click',function(){
+            //console.log('more button - 1');
+            var i = $('.Row').length;
+            var nxt = parseInt($('#idx').val(),10) + 1;
+            if (nxt < i & nxt >0) {
+              $('#idx').val(nxt)
+              $('.Row').hide();
+              $('.Row').eq(0).show();
+              $('.Row').eq(nxt).show();
+            } else {
+              $('#idx').val(i)
+            }
+            //console.log('more button - 2');
+          });
+          $('#idx').on('change', function(){
+            //console.log('idx changed - 1');
+            var i = $('.Row').length;
+            var nxt = $('#idx').val();
+            if (nxt < i & nxt >0) {
+              $('#idx').val(nxt)
+              $('.Row').hide();
+              $('.Row').eq(0).show();
+              $('.Row').eq(nxt).show();
+            } else {
+              $('#idx').val(i)
+            }
+            console.log('idx changed - 2');
+          });
+        });
+        </script>
+        <style type='text/css'>
+        .Table
+        {
+           display: table;
+        }
+        .Title
+        {
+          display: table-caption;
+          text-align: center;
+          font-weight: bold;
+          font-size: larger;
+        }
+        .Row
+        {
+          display: table-row;
+        }
+        .Cell
+        {
+          display: table-cell;
+          border: solid;
+          border-width: thin;
+          padding-left: 5px;
+          padding-right: 5px;
+          vertical-align: top;
+          font-family: "Times New Roman", Times, serif;
+        }
+        .origimg {
+          width: 200px;
+          height:120px;
+        }
+        .ui-btn {
+          width: 10%;
+        }
+        .ui-input-text {
+          width: 90%;
+        }
+        </style>
+        </head>
+        <body>
+        <div id='pageone' data-role='main' class='ui-content'>
+            <p><p><h1> Exploratory Data Analysis (EDA) </h1>
+            <form id="onetoone">
                 <input type='button' id='onetoone' value='Show as Cards'>
-                <input type='button' id='aslist' class='onetoone' value='Show as List'>
-                </form>
-                <p>
-                
-<p><p>
-                <div class='Table'>
-                <div class='Row'>
-                <div class='Cell Title'> Variable </div>
-                <div class='Cell Title'> Distribution </div>
-                <div class='Cell Title'> Descriptive <br> Statistics</div>
-                <div class='Cell Title'> Outliers </div> <div class='Cell Title'> Dependent <br> Variable <br> Distribution </div> </div>
-<div class='Row'><div class='Cell'><b> mpg </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/mpg_1.png' height='150' width='150'><br></div>
-<div class='Cell' style='align: top;'> <u>Data type</u>: Continuous <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %)<p> <u>Mean</u>:  20.09 	 <u>StdDev</u>:  6.027 <br><u>Median</u>:  19.2 	 <u>IQR</u>:  15.43 - 22.8 <br><u>Min</u>:  10.4 	 <u>Max</u>:  33.9 </div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/mpg_2.png' height='150' width='250'><br> <u>Outlier values</u>: <br> No outlier values found</div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/mpg_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> cyl </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/cyl_1.png' height='150' width='150'><br></div>
-<div class='Cell'> <u>Data type</u>: Categorical Data <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %) <p> <u>Number of levels</u>:  3 <br> <ul> <li><u> 4 </u>:  11 </li> <li><u> 6 </u>:  7 </li> <li><u> 8 </u>:  14 </li> </ul> </div>
-<div class='Cell'></div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/cyl_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> disp </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/disp_1.png' height='150' width='150'><br></div>
-<div class='Cell' style='align: top;'> <u>Data type</u>: Continuous <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %)<p> <u>Mean</u>:  230.7 	 <u>StdDev</u>:  123.9 <br><u>Median</u>:  196.3 	 <u>IQR</u>:  120.8 - 326 <br><u>Min</u>:  71.1 	 <u>Max</u>:  472 </div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/disp_2.png' height='150' width='250'><br> <u>Outlier values</u>: <br> No outlier values found</div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/disp_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> hp </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/hp_1.png' height='150' width='150'><br></div>
-<div class='Cell' style='align: top;'> <u>Data type</u>: Continuous <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %)<p> <u>Mean</u>:  146.7 	 <u>StdDev</u>:  68.56 <br><u>Median</u>:  123 	 <u>IQR</u>:  96.5 - 180 <br><u>Min</u>:  52 	 <u>Max</u>:  335 </div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/hp_2.png' height='150' width='250'><br> <u>Outlier values</u>: <br> 335</div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/hp_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> drat </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/drat_1.png' height='150' width='150'><br></div>
-<div class='Cell' style='align: top;'> <u>Data type</u>: Continuous <p> <u>Data length</u>:  31 / 32  ( 96.88 %) <br> <u>Missing</u>:  1  ( 3.125 %)<p> <u>Mean</u>:  3.587 	 <u>StdDev</u>:  0.5406 <br><u>Median</u>:  3.69 	 <u>IQR</u>:  3.08 - 3.92 <br><u>Min</u>:  2.76 	 <u>Max</u>:  4.93 </div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/drat_2.png' height='150' width='250'><br> <u>Outlier values</u>: <br> No outlier values found</div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/drat_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> wt </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/wt_1.png' height='150' width='150'><br></div>
-<div class='Cell' style='align: top;'> <u>Data type</u>: Continuous <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %)<p> <u>Mean</u>:  3.217 	 <u>StdDev</u>:  0.9785 <br><u>Median</u>:  3.325 	 <u>IQR</u>:  2.581 - 3.61 <br><u>Min</u>:  1.513 	 <u>Max</u>:  5.424 </div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/wt_2.png' height='150' width='250'><br> <u>Outlier values</u>: <br> 5.424, 5.345</div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/wt_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> qsec </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/qsec_1.png' height='150' width='150'><br></div>
-<div class='Cell' style='align: top;'> <u>Data type</u>: Continuous <p> <u>Data length</u>:  28 / 32  ( 87.5 %) <br> <u>Missing</u>:  4  ( 12.5 %)<p> <u>Mean</u>:  17.81 	 <u>StdDev</u>:  1.792 <br><u>Median</u>:  17.51 	 <u>IQR</u>:  16.89 - 18.68 <br><u>Min</u>:  14.5 	 <u>Max</u>:  22.9 </div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/qsec_2.png' height='150' width='250'><br> <u>Outlier values</u>: <br> 22.9</div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/qsec_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> vs </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/vs_1.png' height='150' width='150'><br></div>
-<div class='Cell'> <u>Data type</u>: Categorical Data <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %) <p> <u>Number of levels</u>:  2 <br> <ul> <li><u> 0 </u>:  18 </li> <li><u> 1 </u>:  14 </li> </ul> </div>
-<div class='Cell'></div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/vs_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> am </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/am_1.png' height='150' width='150'><br></div>
-<div class='Cell'> <u>Data type</u>: Categorical Data <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %) <p> <u>Number of levels</u>:  2 <br> <ul> <li><u> 0 </u>:  19 </li> <li><u> 1 </u>:  13 </li> </ul> </div>
-<div class='Cell'></div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/am_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> gear </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/gear_1.png' height='150' width='150'><br></div>
-<div class='Cell'> <u>Data type</u>: Categorical Data <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %) <p> <u>Number of levels</u>:  3 <br> <ul> <li><u> 3 </u>:  15 </li> <li><u> 4 </u>:  12 </li> <li><u> 5 </u>:  5 </li> </ul> </div>
-<div class='Cell'></div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/gear_3.png' height='150' width='150'><br></div>
-</div>
-<div class='Row'><div class='Cell'><b> carb </b><p>  </p></div>
-<div class='Cell'><img class='origimg'  src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/carb_1.png' height='150' width='150'><br></div>
-<div class='Cell'> <u>Data type</u>: Categorical Data <p> <u>Data length</u>:  32 / 32  ( 100 %) <br> <u>Missing</u>:  0  ( 0 %) <p> <u>Number of levels</u>:  6 <br> <ul> </div>
-<div class='Cell'></div>
-<div class='Cell'><img class='origimg' src='C:/Users/DANIEL/Desktop/gitfile/stats/report/fig/carb_3.png' height='150' width='150'><br></div>
-</div>
-</div>
-</div>
+            </form>
+            <form id="aslist" style='visibility:hidden;'>
+                <input type='button' id='aslist' value='Show as List'>
+            </form>
+            <p>
+        <p><p>
+            <div class='Table'>
+            <div class='Row'>
+            <div class='Cell Title'> Variable </div>
+            <div class='Cell Title'> Distribution </div>
+            <div class='Cell Title'> Descriptive <br> Statistics</div>
+            <div class='Cell Title'> Outliers </div>
+            <div class='Cell Title'> Dependent <br> Variable <br> Distribution </div>
+            </div>
+        <div class='Row'><div class='Cell Title'><b> sepal_length </b></div><div class='Cell'> <u>Data type</u>: Continuous <p> <u>Data length</u>: 150/150 (  100.00%%) <br>
+                    <u>Missing</u>: 0 (    0.00%%)<p> <u>Mean</u>:     5.80 	 <u>StdDev</u>:     0.80 <br><u>Median</u>:     5.80 	
+                    <u>IQR</u>:     5.10-    6.40<br><u>Min</u>: 4.3 	 <u>Max</u>: 7.9 	 <p><u> Kurtosis</u>:     0.30 	 <br><u> Skweness</u>:    -0.60 </div>
+                    <div class='Cell'><img class="origimg" src="img/sepal_length_1.png"></img></div>
+                    <div class='Cell'><img class="origimg" class="origimg" src="img/sepal_length_2.png"></img> <br> Number of outliers: 0 </div>
+                    <div class='Cell'><img class="origimg" src="img/sepal_length_3.png"></img></div></div><div class='Row'><div class='Cell Title'><b> sepal_width </b></div><div class='Cell'> <u>Data type</u>: Continuous <p> <u>Data length</u>: 150/150 (  100.00%%) <br>
+                    <u>Missing</u>: 0 (    0.00%%)<p> <u>Mean</u>:     3.10 	 <u>StdDev</u>:     0.40 <br><u>Median</u>:     3.00 	
+                    <u>IQR</u>:     2.80-    3.30<br><u>Min</u>: 2.0 	 <u>Max</u>: 4.4 	 <p><u> Kurtosis</u>:     0.30 	 <br><u> Skweness</u>:     0.20 </div>
+                    <div class='Cell'><img class="origimg" src="img/sepal_width_1.png"></img></div>
+                    <div class='Cell'><img class="origimg" class="origimg" src="img/sepal_width_2.png"></img> <br> Number of outliers: 4 </div>
+                    <div class='Cell'><img class="origimg" src="img/sepal_width_3.png"></img></div></div><div class='Row'><div class='Cell Title'><b> petal_length </b></div><div class='Cell'> <u>Data type</u>: Continuous <p> <u>Data length</u>: 150/150 (  100.00%%) <br>
+                    <u>Missing</u>: 0 (    0.00%%)<p> <u>Mean</u>:     3.80 	 <u>StdDev</u>:     1.80 <br><u>Median</u>:     4.40 	
+                    <u>IQR</u>:     1.60-    5.10<br><u>Min</u>: 1.0 	 <u>Max</u>: 6.9 	 <p><u> Kurtosis</u>:    -0.30 	 <br><u> Skweness</u>:    -1.40 </div>
+                    <div class='Cell'><img class="origimg" src="img/petal_length_1.png"></img></div>
+                    <div class='Cell'><img class="origimg" class="origimg" src="img/petal_length_2.png"></img> <br> Number of outliers: 0 </div>
+                    <div class='Cell'><img class="origimg" src="img/petal_length_3.png"></img></div></div><div class='Row'><div class='Cell Title'><b> petal_width </b></div><div class='Cell'> <u>Data type</u>: Continuous <p> <u>Data length</u>: 150/150 (  100.00%%) <br>
+                    <u>Missing</u>: 0 (    0.00%%)<p> <u>Mean</u>:     1.20 	 <u>StdDev</u>:     0.80 <br><u>Median</u>:     1.30 	
+                    <u>IQR</u>:     0.30-    1.80<br><u>Min</u>: 0.1 	 <u>Max</u>: 2.5 	 <p><u> Kurtosis</u>:    -0.10 	 <br><u> Skweness</u>:    -1.30 </div>
+                    <div class='Cell'><img class="origimg" src="img/petal_width_1.png"></img></div>
+                    <div class='Cell'><img class="origimg" class="origimg" src="img/petal_width_2.png"></img> <br> Number of outliers: 0 </div>
+                    <div class='Cell'><img class="origimg" src="img/petal_width_3.png"></img></div></div><div class='Row'><div class='Cell Title'><b> species </b></div><div class='Cell'> <u>Data type</u>: Category <p> <u>Data length</u>: 150/150 <br>
+                    <u>Missing</u>: 0 (    0.00%%)<p> <u>Categories</u>:<br> virginica:    50.00 (   33.30%)<br>versicolor:    50.00 (   33.30%)<br>setosa:    50.00 (   33.30%) <br>  </div>
+                    <div class='Cell'><img class="origimg" src="img/species_1.png"></img></div>
+                    <div class='Cell'><img class="origimg" src="img/species_2.png"></img></div>
+                    <div class='Cell'></div></div>
                 <div data-role='popup' id='myContainer' style='display: none;'>
-                <img id='popup_img' src='' />
+                    <img id='popup_img' src='' />
                 </div>
+
                 </div>
                 </div>
                 </div>
                 <p>
                 <div class='onetoone'>
-                <form id='myform2'>
-                <span> <input type='button' id='less' value=' << '> </span>
-                <span> <input id='idx' name='idx' value='1'></input></span>
-                <span> <input type='button' id='more' value=' >> '> </span>
-                </form>
+                    <form id='myform2' style='display:block;'>
+                      <div id='navigator' style="display: block; width='40%';">
+                          <div id='less' style="float:left;"><input class='ui-btn' type='button' id='less1' value=' << ' style='width: 10%;'></div>
+                          <div id='center' style="float:left;"><input id='idx' name='idx' value='1' style='text-align:center;'></input></div>
+                          <div id='more' style="float:left;"><input class='ui-btn' type='button' id='more1' value=' >> ' style='width: 10%;'></div>
+                      </div>
+                    </form>
                 </div>
                 <p>
                 </body></html>
-                
+        
